@@ -17,21 +17,23 @@
         overflow-x: hidden;
       }
       .morph-bg {
-        position: fixed;
-        top: 0;
-        left: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
         width: 100vw;
         height: 100vh;
         z-index: 0;
         pointer-events: none;
         overflow: hidden;
+        transform: translate(-50%, -50%);
       }
       .morph {
         position: absolute;
         border-radius: 50%;
         filter: blur(60px);
         opacity: 0.5;
-        animation: morphMove 18s infinite alternate ease-in-out;
+        animation: morphMove 8s infinite alternate
+          cubic-bezier(0.77, 0, 0.18, 1);
       }
       .morph1 {
         background: #ff4c29;
@@ -40,6 +42,7 @@
         left: -120px;
         top: -80px;
         animation-delay: 0s;
+        animation-name: morphMove1;
       }
       .morph2 {
         background: #ffb400;
@@ -47,7 +50,8 @@
         height: 320px;
         right: -100px;
         top: 40vh;
-        animation-delay: 3s;
+        animation-delay: 1.5s;
+        animation-name: morphMove2;
       }
       .morph3 {
         background: #007bff;
@@ -55,27 +59,62 @@
         height: 340px;
         left: 60vw;
         top: 70vh;
-        animation-delay: 6s;
+        animation-delay: 3s;
+        animation-name: morphMove3;
       }
-      @keyframes morphMove {
+      @keyframes morphMove1 {
+        0% {
+          transform: scale(1) translateY(0) translateX(0);
+        }
+        30% {
+          transform: scale(1.15) translateY(60px) translateX(80px);
+        }
+        60% {
+          transform: scale(1.05) translateY(-40px) translateX(-60px);
+        }
+        100% {
+          transform: scale(1.2) translateY(30px) translateX(100px);
+        }
+      }
+      @keyframes morphMove2 {
+        0% {
+          transform: scale(1) translateY(0) translateX(0);
+        }
+        40% {
+          transform: scale(1.18) translateY(-80px) translateX(-60px);
+        }
+        70% {
+          transform: scale(1.05) translateY(60px) translateX(40px);
+        }
+        100% {
+          transform: scale(1.1) translateY(-30px) translateX(-100px);
+        }
+      }
+      @keyframes morphMove3 {
         0% {
           transform: scale(1) translateY(0) translateX(0);
         }
         50% {
-          transform: scale(1.2) translateY(40px) translateX(60px);
+          transform: scale(1.22) translateY(80px) translateX(-80px);
         }
         100% {
-          transform: scale(1) translateY(-30px) translateX(-40px);
+          transform: scale(1.1) translateY(-60px) translateX(60px);
         }
       }
+      /* To use your own images in the hero or slider, upload them to your project folder and replace the src attribute, e.g. src="my-photo.jpg" */
       .hero {
         position: relative;
-        min-height: 90vh;
+        min-height: 92vh;
         display: flex;
         align-items: center;
         justify-content: center;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
         background: transparent;
         z-index: 1;
+        padding: 0 0 0 7vw;
+        gap: 100px;
       }
       .hero-content {
         position: relative;
@@ -83,37 +122,49 @@
         text-align: left;
         color: #fff;
         max-width: 600px;
-        margin-left: 60px;
+        margin-left: 200px;
         animation: fadeInDown 1.2s cubic-bezier(0.77, 0, 0.18, 1) 0.2s both;
       }
+      .hero-badge {
+        display: inline-block;
+        background: #ff4c29;
+        color: #fff;
+        font-weight: 700;
+        font-size: 1.1em;
+        border-radius: 8px;
+        padding: 8px 22px;
+        margin-bottom: 22px;
+        letter-spacing: 1px;
+        box-shadow: 0 2px 12px rgba(255, 76, 41, 0.18);
+      }
       .hero-avatar {
-        width: 160px;
-        height: 160px;
-        border-radius: 50%;
-        border: 4px solid #fff;
-        margin-bottom: 30px;
+        width: auto;
+        height: auto;
+        max-width: 200px;
+        max-height: 500px;
+        object-fit: contain;
         box-shadow: 0 4px 32px rgba(0, 0, 0, 0.22);
-        object-fit: cover;
-        float: left;
-        margin-right: 40px;
+        border-radius: 12px;
+        margin-left: 0;
       }
       .hero h1 {
-        font-size: 3.2em;
-        margin: 0;
+        font-size: 3.6em;
+        margin: 0 0 10px 0;
         font-weight: 800;
         letter-spacing: 1px;
         color: #fff;
       }
       .hero h2 {
-        font-size: 1.6em;
+        font-size: 1.5em;
         font-weight: 600;
-        margin: 10px 0 18px 0;
-        color: #ffb400;
-      }
-      .hero-tagline {
-        font-size: 1.25em;
-        margin-bottom: 30px;
+        margin: 0 0 32px 0;
         color: #fff;
+        opacity: 0.85;
+      }
+      .hero-buttons {
+        display: flex;
+        gap: 18px;
+        margin-bottom: 18px;
       }
       .cta-btn {
         display: inline-block;
@@ -128,10 +179,74 @@
         text-decoration: none;
         margin-right: 18px;
       }
-      .cta-btn:hover {
+      .cta-btn.primary {
+        background: #ff4c29;
+        color: #fff;
+        border: none;
+        font-weight: 700;
+        font-size: 1.1em;
+        border-radius: 30px;
+        padding: 16px 40px;
+        box-shadow: 0 2px 16px rgba(255, 76, 41, 0.18);
+        transition: background 0.2s, color 0.2s, transform 0.2s;
+        text-decoration: none;
+      }
+      .cta-btn.primary:hover {
         background: #ffb400;
         color: #181818;
         transform: translateY(-2px) scale(1.04);
+      }
+      .cta-btn.secondary {
+        background: transparent;
+        color: #fff;
+        border: 2px solid #fff;
+        font-weight: 700;
+        font-size: 1.1em;
+        border-radius: 30px;
+        padding: 16px 40px;
+        box-shadow: 0 2px 16px rgba(255, 76, 41, 0.08);
+        transition: background 0.2s, color 0.2s, border 0.2s, transform 0.2s;
+        text-decoration: none;
+      }
+      .cta-btn.secondary:hover {
+        background: #fff;
+        color: #ff4c29;
+        border: 2px solid #ff4c29;
+        transform: translateY(-2px) scale(1.04);
+      }
+      .hero-visual {
+        position: relative;
+        width: 340px;
+        height: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 0;
+        z-index: 2;
+      }
+      .hero-lines {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 340px;
+        height: 340px;
+        z-index: 2;
+        pointer-events: none;
+        animation: heroLinesAnim 6s infinite alternate ease-in-out;
+      }
+      @keyframes heroLinesAnim {
+        0% {
+          opacity: 0.18;
+          transform: scale(1) rotate(-2deg);
+        }
+        50% {
+          opacity: 0.32;
+          transform: scale(1.04) rotate(2deg);
+        }
+        100% {
+          opacity: 0.18;
+          transform: scale(1) rotate(-2deg);
+        }
       }
       @keyframes fadeInDown {
         from {
@@ -292,15 +407,38 @@
           font-size: 1.3em;
         }
       }
-      @media (max-width: 700px) {
-        .hero-content {
-          margin-left: 0;
-          text-align: center;
+      @media (max-width: 900px) {
+        .hero {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 0 0 0 0;
         }
-        .hero-avatar {
-          float: none;
-          margin: 0 auto 30px auto;
-          display: block;
+        .hero-visual {
+          margin: 40px auto 0 auto;
+        }
+      }
+      @media (max-width: 700px) {
+        .hero {
+          flex-direction: column;
+          align-items: center;
+          padding: 0;
+        }
+        .hero-content {
+          text-align: center;
+          margin: 0 auto;
+        }
+        .hero-visual {
+          margin: 30px auto 0 auto;
+          width: 220px;
+          height: 220px;
+        }
+        .hero-avatar,
+        .hero-lines {
+          width: 220px;
+          height: 220px;
+        }
+        .hero h1 {
+          font-size: 2em;
         }
         .slider-section {
           padding: 30px 5px 30px 5px;
@@ -333,128 +471,30 @@
       <div class="morph morph2"></div>
       <div class="morph morph3"></div>
     </div>
-    <header class="hero">
-      <div class="hero-content">
-        <img
-          src="https://avatars.githubusercontent.com/u/13096443?v=4"
-          alt="Ahmed Reda Elgharbawy"
-          class="hero-avatar"
-        />
-        <h1>Ahmed Reda Elgharbawy</h1>
-        <h2>Flutter Lead & Mobile Craftsman</h2>
-        <p class="hero-tagline">
-          Building beautiful, high-impact mobile experiences.<br />Let’s create
-          something extraordinary together.
-        </p>
-        <a href="#projects" class="cta-btn">See My Work</a>
-      </div>
-      <div class="hero-bg"></div>
-    </header>
-
-    <section id="projects" class="slider-section">
-      <h2>Featured Projects</h2>
-      <div class="slider">
-        <div class="slide active">
-          <img
-            src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=600&q=80"
-            alt="League Plus"
-          />
-          <div class="slide-info">
-            <h3>League Plus</h3>
-            <p>
-              Sports prediction app using Flutter, Hive, GraphQL, FCM, and more.
-            </p>
-          </div>
-        </div>
-        <div class="slide">
-          <img
-            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
-            alt="Sanad Rewards"
-          />
-          <div class="slide-info">
-            <h3>Sanad Rewards</h3>
-            <p>
-              Fitness challenge app with sensor integration, Firebase, and
-              custom animations.
-            </p>
-          </div>
-        </div>
-        <div class="slide">
-          <img
-            src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80"
-            alt="I-News TV"
-          />
-          <div class="slide-info">
-            <h3>I-News TV</h3>
-            <p>
-              Real-time news streaming app with custom calendar and
-              notifications.
-            </p>
-          </div>
-        </div>
-        <div class="slide">
-          <img
-            src="https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=600&q=80"
-            alt="Flutter Advanced"
-          />
-          <div class="slide-info">
-            <h3>Flutter Advanced</h3>
-            <p>
-              Advanced architecture, MVVM, and clean code practices in Flutter.
-            </p>
-          </div>
-        </div>
-        <button class="slider-btn prev">&#10094;</button>
-        <button class="slider-btn next">&#10095;</button>
-      </div>
-    </section>
-
-    <section>
-      <h2>Experience</h2>
-      <div class="experience">
-        <strong>Flutter Lead – GTS</strong> (Apr 2024 – Present)<br />
-        Led cross-platform app development and team coordination.
-      </div>
-      <div class="experience">
-        <strong>Software Engineer – Sanad</strong> (Oct 2023 – May 2024)<br />
-        Developed interactive fitness tracking mobile applications.
-      </div>
-    </section>
-
-    <section>
-      <h2>Education</h2>
-      <div class="education">
-        <strong>Mansoura University</strong><br />
-        BSc Computer Science (2016–2020)
-      </div>
-    </section>
-
-    <section>
-      <h2>Certifications</h2>
-      <div class="cert">
-        Flutter Advanced, Clean Architecture & MVVM – Udemy (2025)<br />
-        Certified Software Engineer – HackerRank (2025)
-      </div>
-    </section>
-
-    <section>
-      <h2>Contact</h2>
-      <p>
-        Email:
-        <a href="mailto:devahmedelgharbawy@gmail.com"
-          >devahmedelgharbawy@gmail.com</a
-        >
-      </p>
-      <p>
-        GitHub: <a href="#">your-github-url</a> | LinkedIn:
-        <a href="#">your-linkedin-url</a>
-      </p>
-    </section>
-
-    <footer>
-      &copy; 2025 Ahmed Reda Elgharbawy. Built with 💙 Flutter passion.
-    </footer>
-
+    <div id="include-hero"></div>
+    <div id="include-projects"></div>
+    <div id="include-experience"></div>
+    <div id="include-education"></div>
+    <div id="include-certifications"></div>
+    <div id="include-contact"></div>
+    <div id="include-footer"></div>
+    <script>
+      // Simple HTML include function
+      function includeHTML(id, file) {
+        fetch(file)
+          .then((res) => res.text())
+          .then((data) => {
+            document.getElementById(id).innerHTML = data;
+          });
+      }
+      includeHTML("include-hero", "components/hero.html");
+      includeHTML("include-projects", "components/projects.html");
+      includeHTML("include-experience", "components/experience.html");
+      includeHTML("include-education", "components/education.html");
+      includeHTML("include-certifications", "components/certifications.html");
+      includeHTML("include-contact", "components/contact.html");
+      includeHTML("include-footer", "components/footer.html");
+    </script>
     <script>
       // Simple slider logic
       const slides = document.querySelectorAll(".slide");
