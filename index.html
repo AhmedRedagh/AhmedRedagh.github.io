@@ -12,8 +12,61 @@
       body {
         margin: 0;
         font-family: "Inter", sans-serif;
-        background: linear-gradient(135deg, #f8f9fa 0%, #e3f0ff 100%);
-        color: #212529;
+        background: #181818;
+        color: #fff;
+        overflow-x: hidden;
+      }
+      .morph-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+      .morph {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(60px);
+        opacity: 0.5;
+        animation: morphMove 18s infinite alternate ease-in-out;
+      }
+      .morph1 {
+        background: #ff4c29;
+        width: 420px;
+        height: 420px;
+        left: -120px;
+        top: -80px;
+        animation-delay: 0s;
+      }
+      .morph2 {
+        background: #ffb400;
+        width: 320px;
+        height: 320px;
+        right: -100px;
+        top: 40vh;
+        animation-delay: 3s;
+      }
+      .morph3 {
+        background: #007bff;
+        width: 340px;
+        height: 340px;
+        left: 60vw;
+        top: 70vh;
+        animation-delay: 6s;
+      }
+      @keyframes morphMove {
+        0% {
+          transform: scale(1) translateY(0) translateX(0);
+        }
+        50% {
+          transform: scale(1.2) translateY(40px) translateX(60px);
+        }
+        100% {
+          transform: scale(1) translateY(-30px) translateX(-40px);
+        }
       }
       .hero {
         position: relative;
@@ -21,67 +74,63 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: linear-gradient(120deg, #007bff 0%, #00c6ff 100%);
-        overflow: hidden;
-      }
-      .hero-bg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: url("https://www.transparenttextures.com/patterns/cubes.png");
-        opacity: 0.08;
+        background: transparent;
         z-index: 1;
       }
       .hero-content {
         position: relative;
         z-index: 2;
-        text-align: center;
+        text-align: left;
         color: #fff;
+        max-width: 600px;
+        margin-left: 60px;
         animation: fadeInDown 1.2s cubic-bezier(0.77, 0, 0.18, 1) 0.2s both;
       }
       .hero-avatar {
-        width: 120px;
-        height: 120px;
+        width: 160px;
+        height: 160px;
         border-radius: 50%;
         border: 4px solid #fff;
-        margin-bottom: 20px;
-        box-shadow: 0 4px 32px rgba(0, 0, 0, 0.12);
+        margin-bottom: 30px;
+        box-shadow: 0 4px 32px rgba(0, 0, 0, 0.22);
         object-fit: cover;
+        float: left;
+        margin-right: 40px;
       }
       .hero h1 {
-        font-size: 2.8em;
+        font-size: 3.2em;
         margin: 0;
         font-weight: 800;
         letter-spacing: 1px;
+        color: #fff;
       }
       .hero h2 {
-        font-size: 1.5em;
+        font-size: 1.6em;
         font-weight: 600;
         margin: 10px 0 18px 0;
-        color: #e3f0ff;
+        color: #ffb400;
       }
       .hero-tagline {
-        font-size: 1.2em;
+        font-size: 1.25em;
         margin-bottom: 30px;
-        color: #e3f0ff;
+        color: #fff;
       }
       .cta-btn {
         display: inline-block;
-        padding: 14px 36px;
-        background: #fff;
-        color: #007bff;
+        padding: 16px 40px;
+        background: #ff4c29;
+        color: #fff;
         border-radius: 30px;
         font-weight: 700;
         font-size: 1.1em;
-        box-shadow: 0 2px 16px rgba(0, 123, 255, 0.12);
+        box-shadow: 0 2px 16px rgba(255, 76, 41, 0.18);
         transition: background 0.2s, color 0.2s, transform 0.2s;
         text-decoration: none;
+        margin-right: 18px;
       }
       .cta-btn:hover {
-        background: #007bff;
-        color: #fff;
+        background: #ffb400;
+        color: #181818;
         transform: translateY(-2px) scale(1.04);
       }
       @keyframes fadeInDown {
@@ -95,95 +144,195 @@
         }
       }
       .slider-section {
-        background: #fff;
-        box-shadow: 0 2px 24px rgba(0, 0, 0, 0.04);
-        border-radius: 18px;
+        background: #232323;
+        box-shadow: 0 2px 24px rgba(0, 0, 0, 0.18);
+        border-radius: 22px;
         margin-top: -60px;
-        padding: 60px 20px 40px 20px;
-        max-width: 900px;
+        padding: 80px 20px 80px 20px;
+        max-width: 1200px;
         margin-left: auto;
         margin-right: auto;
         position: relative;
-        z-index: 3;
+        z-index: 2;
+      }
+      .slider-section h2 {
+        color: #ff4c29;
+        font-size: 2.2em;
+        margin-bottom: 30px;
+        text-align: left;
+        font-weight: 800;
       }
       .slider {
         position: relative;
-        overflow: hidden;
-        max-width: 700px;
-        margin: 40px auto 0 auto;
-        border-radius: 16px;
-        box-shadow: 0 4px 32px rgba(0, 123, 255, 0.08);
-        background: #f8f9fa;
+        overflow: visible;
+        max-width: 1000px;
+        margin: 0 auto;
+        border-radius: 20px;
+        box-shadow: 0 4px 32px rgba(0, 0, 0, 0.18);
+        background: #181818;
+        min-height: 420px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
       .slide {
         display: none;
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
-        text-align: center;
-        padding: 30px 20px 20px 20px;
+        text-align: left;
+        padding: 40px 40px 40px 40px;
         transition: opacity 0.6s cubic-bezier(0.77, 0, 0.18, 1);
+        width: 100%;
+        min-height: 340px;
       }
       .slide.active {
         display: flex;
         animation: fadeInDown 0.8s cubic-bezier(0.77, 0, 0.18, 1);
       }
       .slide img {
-        width: 100%;
-        max-width: 340px;
-        border-radius: 12px;
-        margin-bottom: 18px;
-        box-shadow: 0 2px 16px rgba(0, 123, 255, 0.1);
+        width: 380px;
+        height: 320px;
+        border-radius: 18px;
+        margin-right: 48px;
+        box-shadow: 0 2px 32px rgba(255, 76, 41, 0.18);
+        object-fit: cover;
       }
       .slide-info h3 {
-        margin: 0 0 8px 0;
-        color: #007bff;
-        font-size: 1.3em;
-        font-weight: 700;
+        margin: 0 0 18px 0;
+        color: #ffb400;
+        font-size: 2em;
+        font-weight: 800;
       }
       .slide-info p {
         margin: 0;
-        color: #333;
-        font-size: 1.05em;
+        color: #fff;
+        font-size: 1.18em;
+        line-height: 1.6;
       }
       .slider-btn {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        background: rgba(0, 123, 255, 0.85);
+        background: #ff4c29;
         color: #fff;
         border: none;
         border-radius: 50%;
-        width: 44px;
-        height: 44px;
-        font-size: 2em;
+        width: 54px;
+        height: 54px;
+        font-size: 2.2em;
         cursor: pointer;
         z-index: 2;
         transition: background 0.2s;
-        box-shadow: 0 2px 8px rgba(0, 123, 255, 0.1);
+        box-shadow: 0 2px 8px rgba(255, 76, 41, 0.18);
       }
       .slider-btn.prev {
-        left: 18px;
+        left: -70px;
       }
       .slider-btn.next {
-        right: 18px;
+        right: -70px;
       }
       .slider-btn:hover {
-        background: #0056b3;
+        background: #ffb400;
+        color: #181818;
       }
-      @media (max-width: 700px) {
-        .hero h1 {
-          font-size: 2em;
-        }
-        .slider-section {
-          padding: 30px 5px 20px 5px;
-        }
+      section {
+        max-width: 1100px;
+        margin: auto;
+        padding: 60px 20px 80px 20px;
+        background: transparent;
+        z-index: 2;
+        position: relative;
+      }
+      section:not(.slider-section) h2 {
+        color: #ff4c29;
+        font-size: 2em;
+        margin-bottom: 18px;
+        font-weight: 800;
+      }
+      .experience,
+      .education,
+      .cert {
+        margin-bottom: 30px;
+        color: #fff;
+        background: #232323;
+        border-radius: 12px;
+        padding: 24px 28px;
+        box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
+      }
+      footer {
+        text-align: center;
+        padding: 30px;
+        background: #181818;
+        color: #ffb400;
+        font-weight: 700;
+        font-size: 1.1em;
+        letter-spacing: 1px;
+        z-index: 2;
+        position: relative;
+      }
+      a {
+        color: #ffb400;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      a:hover {
+        text-decoration: underline;
+        color: #ff4c29;
+      }
+      @media (max-width: 1100px) {
         .slider {
           max-width: 98vw;
+        }
+        .slide img {
+          width: 220px;
+          height: 180px;
+          margin-right: 18px;
+        }
+        .slide-info h3 {
+          font-size: 1.3em;
+        }
+      }
+      @media (max-width: 700px) {
+        .hero-content {
+          margin-left: 0;
+          text-align: center;
+        }
+        .hero-avatar {
+          float: none;
+          margin: 0 auto 30px auto;
+          display: block;
+        }
+        .slider-section {
+          padding: 30px 5px 30px 5px;
+        }
+        .slider {
+          min-height: 220px;
+        }
+        .slide {
+          flex-direction: column;
+          align-items: center;
+          padding: 20px 10px;
+        }
+        .slide img {
+          margin: 0 0 18px 0;
+        }
+        .slider-btn.prev,
+        .slider-btn.next {
+          left: 10px;
+          right: 10px;
+        }
+        section {
+          padding: 30px 5px 40px 5px;
         }
       }
     </style>
   </head>
   <body>
+    <div class="morph-bg">
+      <div class="morph morph1"></div>
+      <div class="morph morph2"></div>
+      <div class="morph morph3"></div>
+    </div>
     <header class="hero">
       <div class="hero-content">
         <img
