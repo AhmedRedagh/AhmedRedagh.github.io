@@ -480,45 +480,64 @@
     <div id="include-footer"></div>
     <script>
       // Simple HTML include function
-      function includeHTML(id, file) {
+      function includeHTML(id, file, callback) {
         fetch(file)
           .then((res) => res.text())
           .then((data) => {
             document.getElementById(id).innerHTML = data;
+            if (callback) callback();
           });
       }
       includeHTML("include-hero", "components/hero.html");
-      includeHTML("include-projects", "components/projects.html");
+      includeHTML("include-projects", "components/projects.html", function () {
+        // Slider logic for projects
+        const projectSlider = document.querySelector(".project-slider");
+        if (!projectSlider) return;
+        const projectSlides = projectSlider.querySelectorAll(".project-slide");
+        const projectPrevBtn = projectSlider.querySelector(".slider-btn.prev");
+        const projectNextBtn = projectSlider.querySelector(".slider-btn.next");
+        if (!projectSlides.length) return;
+        let projectCurrent = 0;
+        let autoSlideInterval;
+        function showProjectSlide(idx) {
+          projectSlides.forEach((slide, i) => {
+            slide.classList.toggle("active", i === idx);
+          });
+        }
+        function nextSlide() {
+          projectCurrent = (projectCurrent + 1) % projectSlides.length;
+          showProjectSlide(projectCurrent);
+        }
+        function prevSlide() {
+          projectCurrent =
+            (projectCurrent - 1 + projectSlides.length) % projectSlides.length;
+          showProjectSlide(projectCurrent);
+        }
+        if (projectPrevBtn && projectNextBtn) {
+          projectPrevBtn.onclick = function () {
+            prevSlide();
+            resetAutoSlide();
+          };
+          projectNextBtn.onclick = function () {
+            nextSlide();
+            resetAutoSlide();
+          };
+        }
+        function startAutoSlide() {
+          autoSlideInterval = setInterval(nextSlide, 4000);
+        }
+        function resetAutoSlide() {
+          clearInterval(autoSlideInterval);
+          startAutoSlide();
+        }
+        showProjectSlide(projectCurrent);
+        startAutoSlide();
+      });
       includeHTML("include-experience", "components/experience.html");
       includeHTML("include-education", "components/education.html");
       includeHTML("include-certifications", "components/certifications.html");
       includeHTML("include-contact", "components/contact.html");
       includeHTML("include-footer", "components/footer.html");
-    </script>
-    <script>
-      // Simple slider logic
-      const slides = document.querySelectorAll(".slide");
-      const prevBtn = document.querySelector(".slider-btn.prev");
-      const nextBtn = document.querySelector(".slider-btn.next");
-      let currentSlide = 0;
-      function showSlide(idx) {
-        slides.forEach((slide, i) => {
-          slide.classList.toggle("active", i === idx);
-        });
-      }
-      prevBtn.addEventListener("click", () => {
-        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-        showSlide(currentSlide);
-      });
-      nextBtn.addEventListener("click", () => {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
-      });
-      // Auto-slide every 6 seconds
-      setInterval(() => {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
-      }, 6000);
     </script>
   </body>
 </html>

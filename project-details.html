@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Details</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        font-family: "Inter", sans-serif;
+        background: linear-gradient(120deg, #7b2ff2 0%, #f357a8 100%);
+        color: #fff;
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+      .details-container {
+        max-width: 900px;
+        margin: 40px auto;
+        background: #232323ee;
+        border-radius: 22px;
+        box-shadow: 0 2px 24px rgba(0, 0, 0, 0.18);
+        padding: 40px 30px 60px 30px;
+        position: relative;
+      }
+      .details-header {
+        display: flex;
+        align-items: flex-start;
+        gap: 36px;
+        flex-wrap: wrap;
+      }
+      .details-info {
+        flex: 1;
+        min-width: 260px;
+      }
+      .details-title {
+        font-size: 2.2em;
+        font-weight: 800;
+        color: #ffb400;
+        margin: 0 0 10px 0;
+      }
+      .details-label {
+        display: inline-block;
+        background: #ff4c29;
+        color: #fff;
+        font-size: 0.95em;
+        font-weight: 700;
+        border-radius: 8px;
+        padding: 4px 14px;
+        margin-right: 8px;
+        margin-bottom: 8px;
+      }
+      .details-label.ios {
+        background: #007bff;
+      }
+      .details-label.android {
+        background: #43a047;
+      }
+      .details-label.soon {
+        background: #888;
+      }
+      .details-label.erp {
+        background: #ffb400;
+        color: #232323;
+      }
+      .details-desc {
+        font-size: 1.15em;
+        margin: 18px 0 18px 0;
+        color: #fff;
+        line-height: 1.6;
+      }
+      .details-tools {
+        font-size: 1.05em;
+        color: #ffb400;
+        margin-bottom: 18px;
+      }
+      .carousel {
+        flex: 1;
+        min-width: 260px;
+        max-width: 320px;
+        margin: 0 auto;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .carousel-img {
+        width: 260px;
+        height: 520px;
+        object-fit: cover;
+        border-radius: 18px;
+        box-shadow: 0 4px 32px rgba(0, 0, 0, 0.18);
+        background: #181818;
+        margin-bottom: 18px;
+        transition: box-shadow 0.3s, transform 0.3s;
+      }
+      .carousel-controls {
+        display: flex;
+        justify-content: center;
+        gap: 18px;
+        margin-bottom: 10px;
+      }
+      .carousel-btn {
+        background: #ff4c29;
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 44px;
+        height: 44px;
+        font-size: 2em;
+        cursor: pointer;
+        transition: background 0.2s;
+        box-shadow: 0 2px 8px rgba(255, 76, 41, 0.1);
+      }
+      .carousel-btn:hover {
+        background: #ffb400;
+        color: #181818;
+      }
+      .carousel-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 6px;
+      }
+      .carousel-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #fff3;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .carousel-dot.active {
+        background: #ffb400;
+      }
+      @media (max-width: 900px) {
+        .details-header {
+          flex-direction: column;
+          align-items: center;
+        }
+        .carousel {
+          max-width: 90vw;
+        }
+        .carousel-img {
+          width: 180px;
+          height: 360px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="details-container">
+      <div class="details-header">
+        <div class="carousel">
+          <img
+            id="carousel-img"
+            class="carousel-img"
+            src=""
+            alt="Project Screenshot"
+          />
+          <div class="carousel-controls">
+            <button class="carousel-btn prev">&#10094;</button>
+            <button class="carousel-btn next">&#10095;</button>
+          </div>
+          <div class="carousel-dots" id="carousel-dots"></div>
+        </div>
+        <div class="details-info">
+          <div id="details-labels"></div>
+          <h1 class="details-title" id="details-title"></h1>
+          <div class="details-desc" id="details-desc"></div>
+          <div class="details-tools" id="details-tools"></div>
+        </div>
+      </div>
+    </div>
+    <script>
+      // Project data (should match the main site)
+      const projects = [
+        {
+          id: "league-plus",
+          title: "League Plus",
+          labels: ["android", "ios"],
+          desc: "League Plus is an innovative sports app designed to enhance game-day experience by allowing users to make predictions and participate in competitions with friends. Whether a casual fan or a dedicated sports enthusiast, League Plus creates an immersive environment for engaging with favorite sports.",
+          tools:
+            "Hive, Deep Links, Lottie, Flutter, Dart, BLOC, Firebase Cloud Messaging, Pagination, Localization, GraphQL, Rest APIs.",
+          images: [
+            "https://i.imgur.com/1Q9Z1Zm.png",
+            "https://i.imgur.com/2Q9Z1Zm.png",
+            "https://i.imgur.com/3Q9Z1Zm.png",
+          ],
+        },
+        {
+          id: "sanad-rewards",
+          title: "Sanad-Rewards",
+          labels: ["android", "ios"],
+          desc: "Successfully contributed to the development of this challenging app to win and change lifestyle, Developed for IOS and Android platforms, utilizing Flutter, Dart, and Bloc architecture. Leveraged Firebase and RESTful API integration for backend support and integrated features such as sensor data reading from watches and from Health App in iOS and google Fit in Android. In addition to notifications, multimedia support, custom calendar, and immersive animations using Lottie. The app aims to incentivize and reward user engagement through a seamless and interactive experience.",
+          tools:
+            "Flutter, Dart, Bloc, Firebase, Fire store, Notification, read sensors (Read Data from Watch), videos, sounds, pdfs, Shimmers, Custom Calendar, Lottie, WebView.",
+          images: [
+            "https://i.imgur.com/4Q9Z1Zm.png",
+            "https://i.imgur.com/5Q9Z1Zm.png",
+            "https://i.imgur.com/6Q9Z1Zm.png",
+          ],
+        },
+        {
+          id: "i-news-tv",
+          title: "I-News-TV",
+          labels: ["android", "ios"],
+          desc: "Collaboratively contributed to the development of News App for a channel called I News, developed for both platforms [Android, Ios]. The app aims at introducing news for the downloaders. The app has a fas system and live channel viewing also it has a stream built specially for real time news.",
+          tools:
+            "Flutter, Dart, BLOC, Notification, Custom Calendar, Lottie, WebView, Pagination and Localization.",
+          images: [
+            "https://i.imgur.com/7Q9Z1Zm.png",
+            "https://i.imgur.com/8Q9Z1Zm.png",
+            "https://i.imgur.com/9Q9Z1Zm.png",
+          ],
+        },
+        {
+          id: "salute-medical-transport",
+          title: "Salute medical transport",
+          labels: ["android", "ios"],
+          desc: "Contributed to the development of an upcoming truck management application, aimed at simplifying the lives of patients who have timetables for medical sessions and hired drivers. Leveraged Flutter and Dart to create a cross-platform solution integrated with RESTful APIs and notification systems. The application focuses on enhancing driver efficiency and convenience through intuitive features tailored to the demands of the trucking industry and mapping system.",
+          tools:
+            "Flutter, Dart, Cubit, Maps Api, Location Services, Notifications, Lottie, Fire Store, WebView, Custom Widgets.",
+          images: [
+            "https://i.imgur.com/10Q9Z1Zm.png",
+            "https://i.imgur.com/11Q9Z1Zm.png",
+            "https://i.imgur.com/12Q9Z1Zm.png",
+          ],
+        },
+        {
+          id: "gts-systems",
+          title: "GTS Systems",
+          labels: ["erp"],
+          desc: "Successfully engaged in the development of an ERP system that has a reporting, cashier, Billing system for the easement of the sales representatives. The app has a printing system designed to facilitate split work among workers and buyers using Flutter and Dart, with features including go Router for navigation, a custom calendar.",
+          tools:
+            "Flutter, Dart, BLOC, REST API, Localization, Animated Icons, thermal printing, Fire base.",
+          images: [
+            "https://i.imgur.com/13Q9Z1Zm.png",
+            "https://i.imgur.com/14Q9Z1Zm.png",
+            "https://i.imgur.com/15Q9Z1Zm.png",
+          ],
+        },
+        {
+          id: "dalil",
+          title: "Dalil",
+          labels: ["soon"],
+          desc: "Dalil assists users in submitting requests to government systems (e.g., ID renewals, business licensing) and private-sector services. The app has a built-in live chat and live call which assists in communication with customer service and user and payment gateway. utilizing Flutter, Dart, and Bloc architecture. Leveraged Agora services integration for making calls and chat and integrated payment features for Moyaser.",
+          tools:
+            "Flutter, Dart, Agora, Cubit, Lottie, Custom Widgets, Firebase Cloud Messaging, Animation, Error Handling, API Integration.",
+          images: [
+            "https://i.imgur.com/16Q9Z1Zm.png",
+            "https://i.imgur.com/17Q9Z1Zm.png",
+            "https://i.imgur.com/18Q9Z1Zm.png",
+          ],
+        },
+        {
+          id: "a-year-in-review",
+          title: "A year in review",
+          labels: ["soon"],
+          desc: "A year in review app is app for conferences and education in hepatology, GIT and endoscopy in medicine. The app has an integrated system using QR as it has a workshop enrollment, lecture and session engagements between the moderators and the attendees the app was developed using Flutter, Dart, Restful Apis and Bloc architecture with explicit animation and notification.",
+          tools:
+            "Flutter, Dart, RESTful APIs, BLoC, Clean Architecture, Animated Widgets.",
+          images: [
+            "https://i.imgur.com/19Q9Z1Zm.png",
+            "https://i.imgur.com/20Q9Z1Zm.png",
+            "https://i.imgur.com/21Q9Z1Zm.png",
+          ],
+        },
+      ];
+      // Get project id from query string
+      function getProjectId() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get("id");
+      }
+      function renderProjectDetails(project) {
+        document.getElementById("details-title").textContent = project.title;
+        document.getElementById("details-desc").textContent = project.desc;
+        document.getElementById("details-tools").innerHTML =
+          "<b>Tools:</b> " + project.tools;
+        // Labels
+        const labelsDiv = document.getElementById("details-labels");
+        labelsDiv.innerHTML = "";
+        project.labels.forEach((label) => {
+          const span = document.createElement("span");
+          span.className = "details-label " + label;
+          span.textContent = label.charAt(0).toUpperCase() + label.slice(1);
+          labelsDiv.appendChild(span);
+        });
+        // Carousel
+        let current = 0;
+        const img = document.getElementById("carousel-img");
+        const dotsDiv = document.getElementById("carousel-dots");
+        function showImg(idx) {
+          img.src = project.images[idx];
+          Array.from(dotsDiv.children).forEach((dot, i) => {
+            dot.classList.toggle("active", i === idx);
+          });
+        }
+        // Dots
+        dotsDiv.innerHTML = "";
+        project.images.forEach((_, i) => {
+          const dot = document.createElement("button");
+          dot.className = "carousel-dot" + (i === 0 ? " active" : "");
+          dot.onclick = () => {
+            current = i;
+            showImg(current);
+          };
+          dotsDiv.appendChild(dot);
+        });
+        // Controls
+        document.querySelector(".carousel-btn.prev").onclick = function () {
+          current =
+            (current - 1 + project.images.length) % project.images.length;
+          showImg(current);
+        };
+        document.querySelector(".carousel-btn.next").onclick = function () {
+          current = (current + 1) % project.images.length;
+          showImg(current);
+        };
+        showImg(current);
+      }
+      const projectId = getProjectId();
+      const project = projects.find((p) => p.id === projectId);
+      if (project) {
+        renderProjectDetails(project);
+      } else {
+        document.querySelector(".details-container").innerHTML =
+          '<h2 style="color:#ff4c29">Project not found</h2>';
+      }
+    </script>
+  </body>
+</html>
