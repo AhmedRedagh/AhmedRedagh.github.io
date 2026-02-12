@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import BrandLogo from "./BrandLogo";
 
 const Navigation = () => {
   const [scrolled, setScrolled] = useState(false);
