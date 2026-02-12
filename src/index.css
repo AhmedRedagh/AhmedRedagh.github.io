@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Deep navy theme - #0F2854 based */
+    --background: 218 70% 6%;
+    --foreground: 194 55% 95%;
+
+    --card: 218 65% 10%;
+    --card-foreground: 194 55% 95%;
+
+    --popover: 218 68% 8%;
+    --popover-foreground: 194 55% 95%;
+
+    /* Sky blue primary - #4988C4 */
+    --primary: 209 52% 53%;
+    --primary-foreground: 218 70% 6%;
+
+    /* Medium navy - #1C4D8D */
+    --secondary: 214 67% 33%;
+    --secondary-foreground: 194 55% 90%;
+
+    --muted: 218 60% 15%;
+    --muted-foreground: 209 30% 55%;
+
+    /* Light cyan accent - #BDE8F5 */
+    --accent: 194 73% 85%;
+    --accent-foreground: 218 70% 6%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 214 50% 22%;
+    --input: 214 50% 20%;
+    --ring: 209 52% 53%;
+
+    --radius: 0.75rem;
+
+    /* Custom glow colors */
+    --glow: 209 52% 53%;
+    --glow-secondary: 194 73% 85%;
+    --glow-tertiary: 214 67% 45%;
+    --surface-glass: 218 65% 10%;
+
+    /* Sidebar */
+    --sidebar-background: 218 68% 8%;
+    --sidebar-foreground: 194 55% 90%;
+    --sidebar-primary: 209 52% 53%;
+    --sidebar-primary-foreground: 218 70% 6%;
+    --sidebar-accent: 214 67% 25%;
+    --sidebar-accent-foreground: 194 55% 90%;
+    --sidebar-border: 214 50% 22%;
+    --sidebar-ring: 209 52% 53%;
+  }
+
+  .dark {
+    --background: 218 70% 6%;
+    --foreground: 194 55% 95%;
+    --card: 218 65% 10%;
+    --card-foreground: 194 55% 95%;
+    --popover: 218 68% 8%;
+    --popover-foreground: 194 55% 95%;
+    --primary: 209 52% 53%;
+    --primary-foreground: 218 70% 6%;
+    --secondary: 214 67% 33%;
+    --secondary-foreground: 194 55% 90%;
+    --muted: 218 60% 15%;
+    --muted-foreground: 209 30% 55%;
+    --accent: 194 73% 85%;
+    --accent-foreground: 218 70% 6%;
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 214 50% 22%;
+    --input: 214 50% 20%;
+    --ring: 209 52% 53%;
+    --sidebar-background: 218 68% 8%;
+    --sidebar-foreground: 194 55% 90%;
+    --sidebar-primary: 209 52% 53%;
+    --sidebar-primary-foreground: 218 70% 6%;
+    --sidebar-accent: 214 67% 25%;
+    --sidebar-accent-foreground: 194 55% 90%;
+    --sidebar-border: 214 50% 22%;
+    --sidebar-ring: 209 52% 53%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.3);
+    color: hsl(var(--foreground));
+  }
+}
+
+@layer components {
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      135deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--glow-secondary)) 50%,
+      hsl(var(--primary)) 100%
+    );
+  }
+
+  .text-gradient-subtle {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      90deg,
+      hsl(var(--foreground)) 0%,
+      hsl(var(--muted-foreground)) 100%
+    );
+  }
+
+  .glass-card {
+    @apply bg-card/50 backdrop-blur-xl border border-border/50 rounded-2xl;
+    box-shadow: 
+      0 0 0 1px hsl(var(--border) / 0.1),
+      0 20px 50px -12px hsl(var(--background) / 0.8);
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-500;
+  }
+
+  .glass-card-hover:hover {
+    @apply border-primary/30;
+    box-shadow: 
+      0 0 0 1px hsl(var(--primary) / 0.2),
+      0 0 40px -12px hsl(var(--primary) / 0.4),
+      0 20px 50px -12px hsl(var(--background) / 0.8);
+  }
+
+  .glow-text {
+    text-shadow: 0 0 40px hsl(var(--primary) / 0.5);
+  }
+
+  .glow-box {
+    box-shadow: 0 0 60px -12px hsl(var(--primary) / 0.5);
+  }
+
+  .line-glow {
+    @apply bg-primary;
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.8);
+  }
+
+  .magnetic-area {
+    @apply relative cursor-pointer;
+  }
+
+  .noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.02;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .cursor-glow {
+    @apply pointer-events-none fixed w-80 h-80 rounded-full;
+    background: radial-gradient(
+      circle,
+      hsl(var(--primary) / 0.08) 0%,
+      transparent 70%
+    );
+    transform: translate(-50%, -50%);
+    z-index: 0;
+  }
+
+  .section-title {
+    @apply text-xs font-mono uppercase tracking-[0.3em] text-muted-foreground mb-8;
+  }
+
+  .hero-title {
+    @apply text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-[0.85];
+  }
+
+  .project-card {
+    @apply glass-card-hover overflow-hidden;
+  }
+
+  .project-image-wrapper {
+    @apply relative overflow-hidden;
+  }
+
+  .project-image-wrapper::after {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-t from-card to-transparent opacity-60;
+  }
+
+  .skill-bar {
+    @apply h-1 bg-muted rounded-full overflow-hidden;
+  }
+
+  .skill-bar-fill {
+    @apply h-full bg-primary rounded-full;
+    box-shadow: 0 0 10px hsl(var(--primary) / 0.6);
+  }
+
+  .nav-link {
+    @apply relative text-muted-foreground hover:text-foreground transition-colors duration-300;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute -bottom-1 left-0 w-0 h-px bg-primary transition-all duration-300;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+}
+
+@layer utilities {
+  .animation-delay-100 { animation-delay: 100ms; }
+  .animation-delay-200 { animation-delay: 200ms; }
+  .animation-delay-300 { animation-delay: 300ms; }
+  .animation-delay-400 { animation-delay: 400ms; }
+  .animation-delay-500 { animation-delay: 500ms; }
+  .animation-delay-600 { animation-delay: 600ms; }
+  .animation-delay-700 { animation-delay: 700ms; }
+  .animation-delay-800 { animation-delay: 800ms; }
+}
