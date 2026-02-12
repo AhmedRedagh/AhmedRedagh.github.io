@@ -131,8 +131,31 @@ const AboutSection = () => {
                 </motion.div>
               ))}
             </div>
+            </div>
           </div>
-        </div>
+
+
+        {/* GitHub Contribution Graph */}
+        <motion.div
+          className="mt-24"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <div className="text-center mb-8">
+            <h3 className="text-2xl font-bold mb-2">Code Contributions</h3>
+            <p className="text-muted-foreground">My open source activity on GitHub</p>
+          </div>
+          
+          <div className="glass-card p-8 overflow-x-auto flex justify-center items-center bg-card/30 backdrop-blur-sm border border-primary/20 hover:border-primary/40 transition-colors duration-500">
+            <img 
+              src="https://ghchart.rshah.org/4988C4/AhmedRedagh" 
+              alt="Ahmed Reda's GitHub Contribution Chart" 
+              className="w-full min-w-[600px] max-w-4xl opacity-90 hover:opacity-100 transition-opacity filter hue-rotate-15 contrast-125"
+            />
+          </div>
+        </motion.div>
       </div>
     </section>
   );

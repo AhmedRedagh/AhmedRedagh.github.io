@@ -32,11 +32,11 @@ const Navigation = () => {
         <div className="flex items-center justify-between">
           <motion.a
             href="#"
-            className="text-xl font-bold text-gradient"
+            className="inline-flex items-center gap-2"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            Ahmed Reda
+            <BrandLogo withText />
           </motion.a>
 
           <div className="hidden md:flex items-center gap-8">
